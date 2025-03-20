@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Order</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link href="style/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navbar (Opsional) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Kueh Nusantara</a>
+    </nav>
+
+    <!-- Konten Utama -->
+    <main class="container mt-5">
+      <h1>Selamat Datang di Kueh Nusantara</h1>
+      <p>Silakan klik tombol di bawah untuk memesan produk.</p>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#orderModal"
+      >
+        Buka Form Order
+      </button>
+    </main>
+
+    <!-- Modal Form Order -->
+    <div
+      class="modal fade"
+      id="orderModal"
+      tabindex="-1"
+      aria-labelledby="orderModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderModalLabel">Form Order</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="orderForm">
+              <div class="form-group">
+                <label for="name">Nama</label>
+                <input type="text" class="form-control" id="name" required />
+              </div>
+              <div class="form-group">
+                <label for="address">Alamat</label>
+                <input type="text" class="form-control" id="address" required />
+              </div>
+              <div class="form-group">
+                <label for="quantity">Jumlah</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="quantity"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="phone">Nomor WhatsApp</label>
+                <input type="text" class="form-control" id="phone" required />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="submitOrder()"
+            >
+              Submit Order
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      function submitOrder() {
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const quantity = document.getElementById("quantity").value;
+        const phone = document.getElementById("phone").value;
+
+        const productName = "Sofa Ternyaman";
+        const price = "Rp. 100.000";
+
+        const message = `Halo, saya ingin memesan:\n\nProduk: ${productName}\nJumlah: ${quantity}\nHarga: ${price}\n\nNama: ${name}\nAlamat: ${address}\n\nTerima kasih!`;
+        const whatsappUrl = `https://wa.me/+6285695620052?text=${encodeURIComponent(
+          message
+        )}`;
+
+        window.open(whatsappUrl, "_blank");
+        $("#orderModal").modal("hide");
+      }
+    </script>
+  </body>
+</html>
